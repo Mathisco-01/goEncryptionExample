@@ -37,7 +37,7 @@ func HashWithSalt(s string) (hs string, salt string) {
 	rand.Seed(time.Now().UnixNano() * rand.Int63n(32))
 
 	//Make saltbyte
-	var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+	var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 	saltByte := make([]byte, salt_lenght)
 	for i := range saltByte {
 		saltByte[i] = chars[rand.Intn(len(chars))]
