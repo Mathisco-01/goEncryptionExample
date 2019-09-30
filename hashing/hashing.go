@@ -1,3 +1,5 @@
+// Author: Mathis Van Eetvelde 			Mathisco-01
+
 package hashing
 
 import (
@@ -7,15 +9,27 @@ import (
 	"time"
 )
 
+type HashedLoginInfo struct {
+	Hashed_username string
+	Hashed_password string
+	Password_salt string
+}
 
-func hash(s string) (hs string) {
+func HashLoginInfo(username string, password string) (HLI HashedLoginInfo) {
+	HLI.Hashed_username = Hash(username)
+	HLI.Hashed_password, HLI.Password_salt = HashWithSalt(password)
+
+	return HLI
+}
+
+func Hash(s string) (hs string) {
 	h := sha256.New()
 	h.Write([]byte(s))
 	hs = hex.EncodeToString(h.Sum(nil))
 	return hs
 }
 
-func hashWithSalt(s string) (hs string, salt string) {
+func HashWithSalt(s string) (hs string, salt string) {
 
 	salt_lenght := 64
 
@@ -23,13 +37,13 @@ func hashWithSalt(s string) (hs string, salt string) {
 	rand.Seed(time.Now().UnixNano() * rand.Int63n(32))
 
 	//Make saltbyte
-	var letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
 	saltByte := make([]byte, salt_lenght)
 	for i := range saltByte {
-		saltByte[i] = letters[rand.Intn(len(letters))]
+		saltByte[i] = chars[rand.Intn(len(chars))]
 	}
 
 	//Call hash function but add salt to "s" argument
-	hs = hash(s + string(saltByte))
+	hs = Hash(s + string(saltByte))
 	return hs, string(saltByte)
 }
