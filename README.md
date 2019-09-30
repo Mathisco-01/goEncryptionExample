@@ -1,4 +1,4 @@
-# goEncryptionExample
+# goHashingExample
 Basic SHA 265 example in golang.
 
 Could be used to store passwords, emails, ect.
@@ -14,7 +14,7 @@ fmt.Println(hashedLogin)
 # main.go output
 
 ```
-Mathiss-iMac:goEncryptionExample mathis$ go run main.go
+Mathiss-iMac:goHashingExample mathis$ go run main.go
 Type username: mathis
 Type password: test123
 Hashed username: c413eb8a7c9415f5f8ab446ee87b55f6d636d63c1af34c861949d6a300b8f6c7
@@ -23,7 +23,7 @@ Hashing salt: k47DbTjjPeqVuDq9xrh2KqQQGXJqfmp99arntrMvfkTPrm7Pzesn9mByiSXYU65c
 ```
 If we run that a second time, you'll see the username hash is the same, but the password is diffirent (due to a diffirent salt)!
 ```
-Mathiss-iMac:goEncryptionExample mathis$ go run main.go
+Mathiss-iMac:goHashingExample mathis$ go run main.go
 Type username: mathis
 Type password: test123
 Hashed username: c413eb8a7c9415f5f8ab446ee87b55f6d636d63c1af34c861949d6a300b8f6c7
